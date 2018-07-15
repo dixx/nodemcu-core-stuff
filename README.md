@@ -1,5 +1,6 @@
 # nodemcu-core-stuff
-Some handy tools for **my** first steps with NodeMCU(ESP8266). This repo will grow the longer I toy around with the board.
+Some handy tools for **my** first steps with NodeMCU v2.0 (Espressif 8266). This repo will grow the longer I toy around with the board.
+I use Atom Editor with PlatformIO IDE to deploy my binaries onto the board.
 
 # Installation
 Just compile and upload with whatever IDE. I assume you are totally able to.
