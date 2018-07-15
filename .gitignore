@@ -3,4 +3,4 @@
 .clang_complete
 .gcc-flags.json
 src/my_secrets.h
-platformio.ini
+./platformio.ini
