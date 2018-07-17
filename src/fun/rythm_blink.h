@@ -10,6 +10,7 @@
 #include <stdint.h>
 #include "Arduino.h"
 #include "../core/onboard_led.h"
+#include "../core/timer.h"
 
 class RythmBlink {
 public:
@@ -24,23 +25,19 @@ public:
       position_(0),
       ledGlowDuration_(ledGlowDuration), // ms
       interval_(interval), // ms
-      rest_(interval - ledGlowDuration), // ms
-      last_(millis()), // ms, timestamp from last musical note
-      duration_(0),
-      stopPlayback_(false)
+      stopPlayback_(false),
+      timer_()
     {}
 
-    // TODO own cpp file, check coding guidelines, use clever timers
+    // TODO own cpp file, check coding guidelines
 
     void play() {
-        if (stopPlayback_ || noUpdateNeeded()) return;
+        if (stopPlayback_ || timer_.isRunning()) return;
         if (onboard_led::isOn()) {
-            onboard_led::off();
-            duration_ = rest_;
+            continueNote();
         } else {
-            advanceRythm();
+            continueRythm();
         }
-        last_ = millis();
     }
 
 private:
@@ -49,16 +46,10 @@ private:
     uint32_t position_;
     const uint32_t ledGlowDuration_;
     const uint32_t interval_;
-    const uint32_t rest_;
-    uint32_t last_;
-    uint32_t duration_;
     bool stopPlayback_;
+    Timer timer_;
 
-    const bool noUpdateNeeded() const {
-        return (last_ + duration_) > millis();
-    }
-
-    void advanceRythm() {
+    void continueRythm() {
         if (rythm_[position_] == '\0') {
             if (repeat_) {
                 position_ = 0;
@@ -74,12 +65,17 @@ private:
     void playNote() {
         if (rythm_[position_] == '+') {
             onboard_led::on();
-            duration_ = ledGlowDuration_;
+            timer_.start(ledGlowDuration_);
         } else if (rythm_[position_] == '.') {
-            duration_ = interval_;
+            timer_.start(interval_);
         } else {
             // just ignore all other chars
         }
+    }
+
+    void continueNote() {
+        onboard_led::off();
+        timer_.start(interval_ - ledGlowDuration_);
     }
 };
 
