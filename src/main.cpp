@@ -4,7 +4,12 @@
 #include "fun/rythm_blink.h"
 #include "my_secrets.h"
 
-RythmBlink rythm("++.... +....+ +..... ...... +...+. ..+... +..... ......", /*repeat == */ true);
+RythmBlink rythm(
+    "++.... +....+ +..... ......", // the 'bassline'
+    true, // repeat?
+    10, // LED glow time in ms
+    100 // the shortest tone in the song (interval)
+);
 
 void setup() {
     onboard_led::init();
@@ -15,5 +20,5 @@ void setup() {
 
 void loop() {
     httpServer.handleClient();
-    rythm.next();
+    rythm.play();
 }
