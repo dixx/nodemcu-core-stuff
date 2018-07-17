@@ -26,6 +26,10 @@ namespace onboard_led {
         pinMode(ONBOARD_LED, OUTPUT);
         off();
     }
+
+    const bool isOn() {
+        return !digitalRead(ONBOARD_LED);
+    }
 }
 
 #endif
