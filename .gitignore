@@ -4,3 +4,5 @@
 .gcc-flags.json
 src/my_secrets.h
 platformio.ini
+.travis.yml
+/lib/**/*
