@@ -27,6 +27,7 @@ namespace oled_display {
         display.setCursor(28, 30);
         display.println("Guten Tag!");
         display.display();
+        delay(1000);
     }
 }
 
