@@ -1,5 +1,5 @@
-#ifndef OLED_DISPLAY_H
-#define OLED_DISPLAY_H
+#ifndef CORE_OLED_DISPLAY_H
+#define CORE_OLED_DISPLAY_H
 
 #include <Adafruit_GFX.h>
 #include <Adafruit_SSD1306.h>
@@ -28,6 +28,7 @@ namespace oled_display {
         display.println("Guten Tag!");
         display.display();
         delay(1000);
+        display.clearDisplay();
     }
 }
 

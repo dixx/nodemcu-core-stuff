@@ -43,6 +43,7 @@ private:
     Timer timer_;
 
     void display() {
+        oled_display::display.clearDisplay();
         for (uint8_t x = 0; x < MAX_X; ++x) {
             for (uint8_t y = 0; y < MAX_Y; ++y) {
                 oled_display::display.fillRect(x*4, y*4, x*4 + 3, y*4 + 3, (drawBuffer_[x][y] == true) ? WHITE : BLACK);

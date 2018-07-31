@@ -1,5 +1,5 @@
-#ifndef ONBOARD_LED_H
-#define ONBOARD_LED_H
+#ifndef CORE_ONBOARD_LED_H
+#define CORE_ONBOARD_LED_H
 
 #include <stdint.h>
 #include "Arduino.h"

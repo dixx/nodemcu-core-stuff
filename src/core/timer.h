@@ -3,15 +3,15 @@
     It takes into account that `millis()` overflows after 49 days.
 */
 
-#ifndef TIMER_H
-#define TIMER_H
+#ifndef CORE_TIMER_H
+#define CORE_TIMER_H
 
 #include <stdint.h>
 #include "Arduino.h"
 
 class Timer {
 public:
-    Timer() : then_(0) {};
+    Timer() = default;
 
     void start(uint32_t duration) {
         then_ = millis() + duration;
@@ -22,7 +22,7 @@ public:
     }
 
 private:
-    uint32_t then_;
+    uint32_t then_ = 0;
 };
 
 #endif
