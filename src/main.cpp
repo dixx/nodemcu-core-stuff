@@ -1,5 +1,4 @@
 #include "Arduino.h"
-#include "core/onboard_led.h"
 #include "core/oled_128x64.h"
 #include "core/webserver.h"
 #include "core/webupdate.h"
@@ -17,16 +16,13 @@ RythmBlink rythm(
 Conway conway(500 /*ms delay between generations*/);
 
 void setup() {
-    Serial.begin(115200);
-    delay(5000);
-    Serial.println("");
     randomSeed((int)ESP8266_DREG(0x20E44)); // ESP8266 hardware randomizer
     wifi::init();
     webserver::init();
     webupdater::init();
-    onboard_led::init();
     oled_display::init();
     oled_display::splashScreen();
+    rythm.init();
     conway.init();
 }
 

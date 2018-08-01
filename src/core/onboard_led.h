@@ -5,6 +5,10 @@
 #include "Arduino.h"
 
 namespace onboard_led {
+    namespace {
+        bool ready = false;
+    }
+
     const uint32_t FLASH_DURATION = 10; // ms
     const uint32_t ONBOARD_LED = D4;
 
@@ -23,8 +27,10 @@ namespace onboard_led {
     }
 
     void init() {
+        if (ready) return;
         pinMode(ONBOARD_LED, OUTPUT);
         off();
+        ready = true;
     }
 
     const bool isOn() {

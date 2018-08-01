@@ -29,7 +29,9 @@ public:
       timer_()
     {}
 
-    // TODO own cpp file, check coding guidelines
+    void init() {
+        onboard_led::init();
+    }
 
     void play() {
         if (stopPlayback_ || timer_.isRunning()) return;

@@ -9,12 +9,18 @@
 #endif
 
 namespace oled_display {
+    namespace {
+        bool ready = false;
+    }
+
     Adafruit_SSD1306 display(-1);
 
     void init() {
+        if (ready) return;
         display.begin();
         display.clearDisplay();
         display.display();
+        ready = true;
     }
 
     void splashScreen() {

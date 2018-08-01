@@ -4,18 +4,26 @@
 #include "Arduino.h"
 #include <ESP8266WebServer.h>
 #include "core/internal_file_system.h"
+#include "core/serial.h"
 
 namespace webserver {
+    namespace {
+        bool ready = false;
+    }
+
     ESP8266WebServer server(80);
 
     bool sendFileContent(String path);
 
     void init() {
+        if (ready) return;
+        serial::init();
         spiffs::init();
         server.onNotFound([]() {
             if (!sendFileContent(server.uri()))
                 server.send(404, "text/plain", "404: Not Found");
         });
+        ready = true;
     }
 
     String getContentType(const String& filename) { // convert the file extension to the MIME type

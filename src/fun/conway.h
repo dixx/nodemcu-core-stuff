@@ -16,6 +16,7 @@ public:
     Conway(const uint32_t delay) : delay_(delay), timer_() {};
 
     void init() {
+        oled_display::init();
         for (uint8_t x = 0; x < MAX_X; ++x) {
             for (uint8_t y = 0; y < MAX_Y; ++y) {
                 backupBuffer_[x][y] = false;

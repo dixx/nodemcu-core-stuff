@@ -2,9 +2,16 @@
 #define CORE_INTERNAL_FILE_SYSTEM_H
 
 #include <FS.h>
+#include "core/serial.h"
 
 namespace spiffs {
+    namespace {
+        bool ready = false;
+    }
+
     void init() {
+        if (ready) return;
+        serial::init();
         SPIFFS.begin();
         Dir dir = SPIFFS.openDir("/");
         Serial.println("Files in SPIFFS:");
@@ -14,6 +21,7 @@ namespace spiffs {
             Serial.print(f.size());
             Serial.println(" Byte)");
         }
+        ready = true;
     }
 }
 
