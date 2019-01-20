@@ -3,6 +3,7 @@
 #include "core/webserver.h"
 #include "core/webupdate.h"
 #include "core/wifi.h"
+#include "core/sensors/dht.h"
 #include "fun/conway.h"
 #include "fun/rythm_blink.h"
 
@@ -22,12 +23,14 @@ void setup() {
     webupdater::init();
     oled_display::init();
     oled_display::splashScreen();
+    dht::init();
     rythm.init();
     conway.init();
 }
 
 void loop() {
     webserver::server.handleClient();
+    dht::check();
     rythm.play();
     conway.evolve();
 }
